@@ -29,7 +29,6 @@ end
 #               use in face and in back calculations for sideways wind
 def wind(mph, yardage, direction)
 	if direction == "f"
-		puts "forward"
 		if yardage > 200.0
 			wind_change = mph 
 		elsif yardage <= 200.0 && yardage >= 100.0
@@ -79,6 +78,7 @@ def uneven_lie(stance)
 	else 
 		stance_change = 0
 	end
+	stance_change
 end
 
 
@@ -93,6 +93,7 @@ def rough(depth)
 	else
 		rough_change = 0
 	end
+	rough_change
 end
 
 # Rain method - if yes, add 10yds
@@ -102,6 +103,7 @@ def rain(is_raining)
 	else
 		rain_change = 0
 	end
+	rain_change
 end
 
 # Fairway bunker method - if yes, add 10yds
@@ -111,28 +113,12 @@ def bunker(in_sand)
 	else
 		bunker_change = 0
 	end
+	bunker_change
 end
 # Set variables for yardage, aim, ball in stance, and hand placement.  Yardage will be a prompt
 
 
 
-###### DRIVER TESTS
-
-
-yardage = 155.0
-aim = 0
-ball_in_stance = "normal"
-hands = "normal"
-
-temp = temperature(71.0)
-elev = elevation(-15.0, yardage)
-windy = wind(15.0, yardage, "db")
-lie = uneven_lie("e")
-ruff = rough("n")
-#adjust = yardage + temp + elev + windy + lie
-#adjust_rough = adjust + (adjust * ruff)
-#puts "Adjusted yardage is: #{adjust_rough}"
-p windy
 
 
 ####### USER INTERFACE
