@@ -24,13 +24,19 @@ clubs_table = <<-SQL
 	SQL
 db.execute(clubs_table)
 
+## have user add clubs and distances to the club table
+club = ""
+until club == "d"
+	puts "Enter a club or type 'd' if finished"
+	club = gets.chomp
+	if club == "d"
+		break
+	end
+	puts "Enter the distance (only use yardage to the nearest 10s. ex - 130, 160, etc.)"
+	dist = gets.chomp
+	db.execute("INSERT INTO clubs (name, dist_yards) VALUES (?,?)", [club, dist])
+end
 
-# club_enter = ""
-# until club_enter == "d"
-# 	puts "Enter a club or type 'd' if finished"
-# 	club = gets.chomp
-# 	puts "Enter the distance (only use yardage to the nearest 10s. ex - 130, 160, etc."
-# 	dist = gets.chomp
 
 	
 
