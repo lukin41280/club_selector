@@ -20,3 +20,11 @@ puts "Adjusted yardage is: #{adjust_rough}"
 #p bunker
 
 ## PSUEDOCODE INTERFACE .....
+
+# ask if user is new or existing
+
+# if new, prompt for name and all clubs/distances and 
+# add into new database
+
+# if existing, ask for name (this will reference DB)
+

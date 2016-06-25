@@ -115,12 +115,5 @@ def bunker(in_sand)
 	end
 	bunker_change
 end
-# Set variables for yardage, aim, ball in stance, and hand placement.  Yardage will be a prompt
-
-
-
-
-
-####### USER INTERFACE
 
 
