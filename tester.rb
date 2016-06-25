@@ -37,19 +37,26 @@ SQL
 
 db.execute(small_table)
 db.execute("INSERT INTO club (name, dist_yards) VALUES (?,?)", [club, distance])
+db.execute("INSERT INTO club (name, dist_yards) VALUES (?,?)", ["7i", 160])
+db.execute("INSERT INTO club (name, dist_yards) VALUES (?,?)", ["9i", 140])
 
-yardage = 151.3
-yrd_adjuster = ((yardage/10).floor * 10).to_s
+yardage = 142.78
+yrd_adjuster = ((yardage/10).floor * 10)
 yrd_adjuster
 
 clubs = db.execute("SELECT * FROM club")
-p clubs
+#p clubs
 puts "here is test line"
-if clubs["dist_yards"] == yrd_adjuster
-	puts "You should use your #{clubs["name"]}"
+p clubs[0]["dist_yards"]
+puts "No club will be given if there is no yardage match.  Results are:"
+clubs.size.times do |club|
+	if clubs[club]["dist_yards"] == yrd_adjuster
+	puts "You should use your #{clubs[club]["name"]}"
+	end
 end
+puts "Play this shot for adjusted yards of #{yrd_adjuster}"
 
 # trying to access specific index of database
-
+#puts "You should use your #{clubs[0]["name"]}"
 
 
