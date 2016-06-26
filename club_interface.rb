@@ -111,31 +111,3 @@ p rough_adjuster
 adjust_to_tens = ((rough_adjuster/10).floor * 10)
 p adjust_to_tens
 
-# yardage = 88.0
-# aim = 0
-# ball_in_stance = "normal"
-# hands = "normal"
-
-# temp = temperature(76.0)
-# elev = elevation(0, yardage)
-# windy = wind(5.0, yardage, "f")
-# lie = uneven_lie("n")
-# ruff = rough("n")
-# rain = rain("n")
-# bunker = bunker("y")
-# adjust = yardage + temp + elev + windy + lie + rain + bunker
-# p adjust
-# adjust_rough = adjust + (adjust * ruff)
-# puts "Adjusted yardage is: #{adjust_rough}"
-
-#p bunker
-
-## PSUEDOCODE INTERFACE .....
-
-# ask if user is new or existing
-
-# if new, prompt for name and all clubs/distances and 
-# add into new database
-
-# if existing, ask for name (this will reference DB)
-
