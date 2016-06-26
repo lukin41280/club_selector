@@ -1,15 +1,18 @@
+# this is a project that i plan to continue to work on:
 # program that will provide a golfer what club they should use depending upon 
 # multiple factors affecting their shot such as wind, slope, and temperature.
 # methods are created to adjust the yardage the golfer will have to account 
-# from their imputs.  the golfer will need to set up the distancces upfront
+# from their imputs.  the golfer will need to set up the distances upfront
 # on how far they hit each club and this will be stored into a database titled 
 # as their name. once the questions regarding the shot conditions are answered,
 # the program will print the club to use based off the adjusted yardage. 
 
 # i am trying to work out setting up clubs to have a range of yardage.  until
 # then, all clubs will have one value at what I am calling the "nearest 10th".
-# this means if the adjusted yardage equals say 153.75 yards, the effective 
-# yardage will be 150 so it can match to golf club to provide to user.
+# i will then round the adjusted yardage to nearest 10th. ex. adj yards is 167.3,
+# will round to 170.  adj yards is 142.89, will round to 140.  this will allow
+# the code to provide a matched club from the database as long as that yaradge
+# was entered.
 
 # WORK IN PROGRESS:
 # 1) program only works setting up the database entirely everytime. would like
@@ -17,6 +20,10 @@
 #    keep adding clubs and distances
 # 2) would like to have user be able to make changes to their existing clubs
 #    database or immediately when they create their first one
+# 3) have a range of distances for each club. idea: whatever is entered, set a
+#    range of values.  min will be user entry minus 5 and max will be add 4 to
+#    user entry to give a range of 10 yards.  this will provide more accurate
+#    results
 
 require_relative "club_methods"
 require "SQLite3"
@@ -123,8 +130,8 @@ p adjusted_yardage
 # account for if in the rough and how buried ball is
 rough_adjuster = adjusted_yardage + (adjusted_yardage * ruff)
 p rough_adjuster
-# drop yardage to the nearest 10th. ie 164 to 160
-adjust_to_tens = ((rough_adjuster/10).floor * 10)
+# round yardage to the nearest 10th
+adjust_to_tens = (((rough_adjuster + 5)/10).floor * 10)
 p adjust_to_tens
 
 # find yardage in database and match to club to hit. provide to user
