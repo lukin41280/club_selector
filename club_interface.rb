@@ -65,6 +65,7 @@ virtual_bag = db.execute("SELECT * FROM virtual_bag")
 puts "Your virtual golf bag:"
 clubs_printer(virtual_bag)
 
+# ----------------------------
 # Apply WIP #2
 
 # puts "Do you need to make any changes? y/n"
@@ -94,6 +95,7 @@ clubs_printer(virtual_bag)
 # 		redo
 # 	end
 # end
+#-----------------------------
 
 # ask questions about the shot and call corresponding method
 puts "What is your distance to target?"
