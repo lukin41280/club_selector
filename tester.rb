@@ -10,8 +10,8 @@ if member == "n"
 	puts "enter average distance"
 	distance = gets.chomp
 
-	$DB = SQLite3::Database.new("#{name}.db")
-	$DB.results_as_hash = true
+	db = SQLite3::Database.new("#{name}.db")
+	db.results_as_hash = true
 
 	# create_club_table = <<-SQL
 	# 	CREATE TABLE IF NOT EXISTS test(
@@ -44,12 +44,12 @@ if member == "n"
 	db.execute("INSERT INTO club (name, dist_yards) VALUES (?,?)", ["9i", 140])
 end
 
-exist_db = SQLite3_load_extension("jay.db")
+#exist_db = SQLite3_load_extension("jay.db")
 yardage = 142.78
 yrd_adjuster = ((yardage/10).floor * 10)
 yrd_adjuster
 
-clubs = exist_db.execute("SELECT * FROM club")
+clubs = db.execute("SELECT * FROM club")
 #p clubs
 puts "here is test line"
 p clubs[0]["dist_yards"]

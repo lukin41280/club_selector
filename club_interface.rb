@@ -6,16 +6,29 @@
 # as their name. once the questions regarding the shot conditions are answered,
 # the program will print the club to use based off the adjusted yardage. 
 
+# i am trying to work out setting up clubs to have a range of yardage.  until
+# then, all clubs will have one value at what I am calling the "nearest 10th".
+# this means if the adjusted yardage equals say 153.75 yards, the effective 
+# yardage will be 150 so it can match to golf club to provide to user.
+
+# WORK IN PROGRESS:
+# 1) program only works setting up the database entirely everytime. would like
+#    to have program access existing database so returning users dont have to 
+#    keep adding clubs and distances
+# 2) would like to have user be able to make changes to their existing clubs
+#    database or immediately when they create their first one
+
 require_relative "club_methods"
 require "SQLite3"
 
-## setting up golfer's clubs database
+# setting up golfer's clubs database
+# Apply WIP #1 around here
 puts "What is your name?"
 name = gets.chomp
 db = SQLite3::Database.new("#{name}.db")
 db.results_as_hash = true
 
-## create table to hold user entered clubs
+# create table to hold user entered clubs
 clubs_table = <<-SQL
 		CREATE TABLE IF NOT EXISTS virtual_bag (
 			club_name VARCHAR(255),
@@ -24,13 +37,13 @@ clubs_table = <<-SQL
 	SQL
 db.execute(clubs_table)
 
-## have user add clubs and distances to the club table
+# have user add clubs and distances to the club table
 club = ""
 until club == "d"
 	puts "Enter a club or type 'd' if finished"
 	club = gets.chomp
 	if club == "d"
-		puts "Virtual golf bag completed"
+		puts "**Virtual golf bag completed**"
 		puts
 		break
 	end
@@ -44,6 +57,9 @@ virtual_bag = db.execute("SELECT * FROM virtual_bag")
 # provide all clubs info and prompt to make changes
 puts "Your virtual golf bag:"
 clubs_printer(virtual_bag)
+
+# Apply WIP #2
+
 # puts "Do you need to make any changes? y/n"
 # change = gets.chomp
 # while change == "y"
@@ -79,7 +95,7 @@ yardage = gets.chomp.to_f
 puts "What is the temperature today?"
 temp = temperature(gets.chomp.to_f)
 
-puts "What is the elevation change to your target?"
+puts "What is the elevation change to your target? Use (-) if above target."
 elevate = elevation(gets.chomp.to_f, yardage)
 
 puts "How strong is the wind in mph?"
@@ -110,4 +126,17 @@ p rough_adjuster
 # drop yardage to the nearest 10th. ie 164 to 160
 adjust_to_tens = ((rough_adjuster/10).floor * 10)
 p adjust_to_tens
+
+# find yardage in database and match to club to hit. provide to user
+puts 
+puts "Results are:"
+puts
+
+virtual_bag.size.times do |club|
+	if virtual_bag[club]["dist_yards"] == adjust_to_tens
+	puts "You should use your #{virtual_bag[club]["club_name"]}"
+	end
+end
+puts "Play this shot for adjusted yardage of #{adjust_to_tens}"
+puts "NOTE: No club is given if there is no yardage match"
 
