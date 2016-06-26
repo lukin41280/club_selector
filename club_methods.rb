@@ -1,5 +1,7 @@
 ###### METHODS
 
+
+
 # Temperature method - for every 1 degree below 70 degrees: add .35yds
 def temperature(degrees)
 	if degrees < 70.0
@@ -67,18 +69,18 @@ def wind(mph, yardage, direction)
 	wind_change
 end
 
-# Stance method - if uphill: add 10yds aim 3yds right - ball forward, if downhill: minus 10yds aim 3yds left - ball backward
+# Slope method - if uphill: add 10yds aim 3yds right - ball forward, if downhill: minus 10yds aim 3yds left - ball backward
 #                 if above ball: aim body 5yds left >150 yards and 10yds <150 yards - choke down
 #                 reverse for below ball - choke up
-def uneven_lie(stance)
-	if stance == "u"
-		stance_change = 10.0
-	elsif stance == "d"
-		stance_change = -10.0
+def slope(hill_type)
+	if hill_type == "u"
+		slope_change = 10.0
+	elsif hill_type == "d"
+		slope_change = -10.0
 	else 
-		stance_change = 0
+		slope_change = 0
 	end
-	stance_change
+	slope_change
 end
 
 
@@ -114,6 +116,16 @@ def bunker(in_sand)
 		bunker_change = 0
 	end
 	bunker_change
+end
+
+
+
+
+# Print clubs listed in vitrual golf bag
+def clubs_printer(db_table)
+	db_table.size.times do |club|
+		puts "#{db_table[club]["club_name"]} averages #{db_table[club]["dist_yards"]} yards" 
+	end
 end
 
 
