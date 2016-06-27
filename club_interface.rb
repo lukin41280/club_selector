@@ -1,7 +1,6 @@
 # WORK IN PROGRESS:
 # 1) DONE
-# 2) would like to have user be able to make changes to their existing clubs
-#    database or immediately when they create their first one
+# 2) DONE
 # 3) have a range of distances for each club. idea: whatever is entered, set a
 #    range of values.  min will be user entry minus 5 and max will be add 4 to
 #    user entry to give a range of 10 yards.  this will provide more accurate
@@ -109,9 +108,6 @@ until change == "n"
 	clubs_printer(virtual_bag)
 	puts
 end
-# puts "Your updated virtual bag:"
-# clubs_printer(virtual_bag)
-# puts
 
 # ask questions about the shot and call corresponding method
 puts "Tell me about your upcomming shot.  Respond to some questions with letters in ()."
