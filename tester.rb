@@ -24,22 +24,44 @@ until change == "n"
 	if change == "n"
 		break
 	end
-	
+
 	puts "Do you need to update club (u), add a club (a), or delete a club (d)?"
 	choices = gets.chomp
 
 	case choices
 	when "u"
-		puts "this is update"
+		puts "Please select club to update"
+		update_club = gets.chomp
+		
+		puts "Please update the average yardage to the nearest 10s"
+		new_dist = gets.chomp
+		
+		db.execute("UPDATE virtual_bag SET dist_yards= ? WHERE club_name= ?", [new_dist, update_club])
+		puts "Your #{update_club} was successfully updated."
+		puts
 	when "a"
-		puts "this is add"
+		puts "Please name a new club to add."
+		club_add = gets.chomp
+
+		puts "Enter the average distance (only use yardage to the nearest 10s. ex - 130, 160, etc.)"
+		dist_add = gets.chomp
+
+		db.execute("INSERT INTO virtual_bag (club_name, dist_yards) VALUES (?,?)", [club_add, dist_add])
+		puts "The #{club_add} was successfully added"
+		puts
 	when "d"
-		puts "this is delete"
+		puts "Which club would you like to delete?"
+    	club_delete = gets.chomp
+     	
+     	db.execute("DELETE FROM virtual_bag WHERE club_name= ?", [club_delete])
+     	puts "Your #{club_delete} was successfully deleted"
+     	puts
 	else
 		puts "Incorrect response.  Please start again."
 	end
 end
-puts "End of loop"
+puts "Your updated virtual bag:"
+clubs_printer(virtual_bag)
 
 
 
