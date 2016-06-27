@@ -1,3 +1,5 @@
+*** run club_interface for main progam to run ***
+
 this is a project that i plan to continue to work on:
 
 this program will provide a golfer what club they should use depending upon 
