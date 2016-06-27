@@ -1,3 +1,5 @@
+# file to test additions to code without altering original interface file
+
 require 'sqlite3'
 require_relative "club_methods"
 

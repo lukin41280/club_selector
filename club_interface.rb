@@ -63,37 +63,55 @@ puts "Here is your virtual golf bag:"
 clubs_printer(virtual_bag)
 puts
 
-# ----------------------------
-# Apply WIP #2
+change = ""
+until change == "n"
+	puts "Do you need to make any changes? y/n"
+	change = gets.chomp
+	if change == "n"
+		break
+	end
 
-# puts "Do you need to make any changes? y/n"
-# change = gets.chomp
-# while change == "y"
-# 	puts "Do you need to update, add, or delete? u/a/d"
-# 	choices = gets.chomp
-# 	case choices
-# 	# when "u"
-# 	# 	puts "Please select club to change"
-# 	# 	update_club = gets.chomp
-# 	# 	puts "Please enter a new club name or re-enter"
-# 	# 	new_club = gets.chomp
-# 	# 	puts "Please update the average yardage to the nearest 10s"
-# 	# 	new_dist = gets.chomp
-# 	# 	db.execute("UPDATE virtual_bag SET club_name=#{new_club}, dist_yards=#{new_dist} WHERE club_name=#{update_club}")
+	puts "Do you need to update club (u), add a club (a), or delete a club (d)?"
+	choices = gets.chomp
 
-# 	# end
-#     when "d"
-#     	puts "Which club would you like to delete?"
-#     	club_delete = gets.chomp
-#     	db.execute("DELETE FROM virtual_bag WHERE club_name=#{club_delete}")
-#     end
-# 	puts "Are you all done with changes? y/n"
-# 	all_done = gets.chomp
-# 	if all_done == "n"
-# 		redo
-# 	end
-# end
-#-----------------------------
+	case choices
+	when "u"
+		puts "Please select club to update"
+		update_club = gets.chomp
+		
+		puts "Please update the average yardage to the nearest 10s"
+		new_dist = gets.chomp
+		
+		db.execute("UPDATE virtual_bag SET dist_yards= ? WHERE club_name= ?", [new_dist, update_club])
+		puts "Your #{update_club} was successfully updated."
+		puts
+	when "a"
+		puts "Please name a new club to add."
+		club_add = gets.chomp
+
+		puts "Enter the average distance (only use yardage to the nearest 10s. ex - 130, 160, etc.)"
+		dist_add = gets.chomp
+
+		db.execute("INSERT INTO virtual_bag (club_name, dist_yards) VALUES (?,?)", [club_add, dist_add])
+		puts "The #{club_add} was successfully added"
+		puts
+	when "d"
+		puts "Which club would you like to delete?"
+    	club_delete = gets.chomp
+     	
+     	db.execute("DELETE FROM virtual_bag WHERE club_name= ?", [club_delete])
+     	puts "Your #{club_delete} was successfully deleted"
+     	puts
+	else
+		puts "Incorrect response.  Please start again."
+	end
+	puts "Your updated virtual bag:"
+	clubs_printer(virtual_bag)
+	puts
+end
+# puts "Your updated virtual bag:"
+# clubs_printer(virtual_bag)
+# puts
 
 # ask questions about the shot and call corresponding method
 puts "Tell me about your upcomming shot.  Respond to some questions with letters in ()."
